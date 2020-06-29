@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     int index = 0;
     final Random r = new Random();
 
-    @SuppressLint("ResourceType")
+    @SuppressLint({"ResourceType", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,26 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
         index = r.nextInt(100) + 1;
 
-
+        urlShow.setText("http://myfile.org/" + index);
         buttonNext.setOnClickListener(new View.OnClickListener() {
-
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                urlShow.setText("http://myfile.org/" + index);
-                buttonNext.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                buttonPrevious.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+            }
+        });
+
+        buttonPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
